@@ -1,0 +1,13 @@
+.env*
+LocalSettings.php
+config/LocalSettings.php
+
+vendor/
+node_modules/
+images/
+cache/
+logs/
+
+.idea/
+.vscode/
+.DS_Store 

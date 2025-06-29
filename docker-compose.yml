@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: mediawiki
+      MARIADB_USER: wiki
+      MARIADB_PASSWORD: example
+      MARIADB_ROOT_PASSWORD: rootpass
+    volumes:
+      - db-data:/var/lib/mysql      
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uwiki", "-pexample"]
+      interval: 5s
+      retries: 5
+
+  wiki:
+    image: mediawiki:1.43.1
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      MW_SITE_SERVER: http://localhost:8080
+      MW_SCRIPT_PATH: ""
+      MW_SITE_NAME: "Giant Bomb Wiki"
+      MW_DB_HOST: db
+      MW_DB_NAME: mediawiki
+      MW_DB_USER: wiki
+      MW_DB_PASSWORD: example
+    volumes:
+      - ./extensions:/var/www/html/extensions:cached
+      - ./skins:/var/www/html/skins:cached
+      - ./config:/config
+      - wiki-data:/var/www/html/images
+      - ./config/LocalSettings.php:/var/www/html/LocalSettings.php
+      #- ./entrypoint.sh:/entrypoint.sh:ro
+    #entrypoint: ["/entrypoint.sh"]
+
+volumes:
+  db-data:
+  wiki-data: {} 
