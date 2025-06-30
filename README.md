@@ -14,3 +14,6 @@
 - Before doing anything else, run `docker compose restart`.
 - You should now be able to access the wiki at http://localhost:8080/ and you should see the Gamepress skin enabled.
 
+# Added Semantic MediaWiki
+- Uses mounted html which might be slow to use
+- Runs php patch on every restart, need to see how to run on just first launch.

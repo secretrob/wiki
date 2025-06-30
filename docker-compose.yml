@@ -29,8 +29,7 @@ services:
       MW_DB_USER: wiki
       MW_DB_PASSWORD: example
     volumes:
-      - ./extensions:/var/www/html/extensions:cached
-      - ./skins:/var/www/html/skins:cached
+      - ./html:/var/www/html:cached
       - ./config:/config
       - wiki-data:/var/www/html/images
       #- ./config/LocalSettings.php:/var/www/html/LocalSettings.php
