@@ -14,12 +14,15 @@
 - Before doing anything else, run `docker compose restart`.
 - You should now be able to access the wiki at http://localhost:8080/ and you should see the Gamepress skin enabled.
 
-## Backlinks - Test Example
+## Backlinks - Test Example POC
+- Needs to be changed to do multiple categories, not just hardcoded for games
+- Change to extension and use proper api calls / db calls instead of curl to api.php
 
+# How to use test
 - After site is running navigate to: http://localhost:8080/index.php/MediaWiki:Common.css
 - Paste the following:
 
-`/* CSS placed here will be applied to all skins */
+```css
 .backlinks {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
@@ -55,10 +58,12 @@
 .backlinks ul li a:hover {
     color: #0056b3;
     text-decoration: underline;
-}`
+}
+```
 
 - Then open your LocalSettings.php and add the following to the end and restart your container.
-`# BACKLINKS
+```php
+# BACKLINKS
 $wgHooks['SkinAfterContent'][]='backlinks_func';
 
 function backlinks_func( &$data, Skin $skin ) {
@@ -128,4 +133,5 @@ function backlinks_func( &$data, Skin $skin ) {
 	}
 
     return true;
-}`
+}
+```
