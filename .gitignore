@@ -1,6 +1,7 @@
 .env*
 LocalSettings.php
 config/LocalSettings.php
+html/LocalSettings.php
 
 vendor/
 node_modules/
