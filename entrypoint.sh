@@ -4,7 +4,9 @@ set -e
 # If LocalSettings.php exists in the host-mounted config folder, copy it in
 if [ -f /config/LocalSettings.php ]; then
   cp /config/LocalSettings.php /var/www/html/LocalSettings.php
-else  
+fi;
+
+#else  
   cd /var/www/html/
   BASH_ARGV0=1
   until [ $? = 0 ]; do
@@ -25,6 +27,8 @@ else
   docker-php-ext-configure zip && docker-php-ext-install zip
 
   composer update --no-dev
-fi;
+
+  php maintenance/update.php
+#fi;
 
 exec apache2-foreground
