@@ -33,9 +33,9 @@ services:
       - ./skins:/var/www/html/skins:cached
       - ./config:/config
       - wiki-data:/var/www/html/images
-      - ./config/LocalSettings.php:/var/www/html/LocalSettings.php
-      #- ./entrypoint.sh:/entrypoint.sh:ro
-    #entrypoint: ["/entrypoint.sh"]
+      #- ./config/LocalSettings.php:/var/www/html/LocalSettings.php
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/entrypoint.sh"]
 
 volumes:
   db-data:
